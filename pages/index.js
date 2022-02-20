@@ -54,18 +54,34 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Next.js Starter!</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Frutty</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
       </Head>
 
       <main>
-        <div>
-          <input type="text" value={tagsSearch} onChange={(e) => setTagsSearch(e.target.value)} />
+        <div className="search">
+          <div className="control">
+            <label className="label" htmlFor="tags">Ключевые слова</label>
+            <input
+              className="input"
+              type="text"
+              id="tags"
+              value={tagsSearch}
+              onChange={(e) => setTagsSearch(e.target.value)}
+            />
+          </div>
+          <div className="control">
+            <label className="label" htmlFor="colors">Цвета</label>
+            <input
+              className="input"
+              type="text"
+              id="colors"
+              value={colorsSearch}
+              onChange={(e) => setColorsSearch(e.target.value)}
+            />
+          </div>
+          <button onClick={findStickers} className="button">Найти</button>
         </div>
-        <div>
-          <input type="text" value={colorsSearch} onChange={(e) => setColorsSearch(e.target.value)} />
-        </div>
-        <button onClick={findStickers}>Найти</button>
 
         <div className="collection">
           {stickers.map((el) =>
