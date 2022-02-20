@@ -26,8 +26,8 @@ export default function Home() {
         `entries` +
         `?access_token=${accessToken}` +
         `&content_type=${contentType}` +
-        (tags !== '' ? `&fields.tags[in]=${tags}` : '') +
-        (colors !== '' ? `&fields.color[in]=${colors}` : '')
+        (tags !== '' ? `&fields.tags[all]=${tags}` : '') +
+        (colors !== '' ? `&fields.color[all]=${colors}` : '')
       );
       const { items, includes } = response.data;
       const images = includes.Asset.reduce((acc, cur) => {
@@ -51,10 +51,6 @@ export default function Home() {
   const findStickers = () => {
     getStickers();
   };
-
-  useEffect(() => {
-    getStickers();
-  }, []);
 
   return (
     <div className="container">
