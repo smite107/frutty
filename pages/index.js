@@ -7,6 +7,8 @@ const accessToken = 'edm-q8Y1dbMHUZZRa6MIhJI0GEr4X_4DmkMbLMUhbc0';
 const environment = 'master';
 const contentType = 'sticker';
 
+const prepareToSearch = (v) => v.trim().toLowerCase();
+
 export default function Home() {
   const [stickers, setStickers] = useState([]);
   const [tagsSearch, setTagsSearch] = useState('');
@@ -14,6 +16,9 @@ export default function Home() {
 
   const getStickers = async () => {
     try {
+      const tags = prepareToSearch(tagsSearch);
+      const colors = prepareToSearch(colorsSearch);
+
       const response = await axios.get(
         `https://cdn.contentful.com/` +
         `spaces/${spaceId}/` +
@@ -21,8 +26,8 @@ export default function Home() {
         `entries` +
         `?access_token=${accessToken}` +
         `&content_type=${contentType}` +
-        (tagsSearch.trim() !== '' ? `&fields.tags[in]=${tagsSearch}` : '') +
-        (colorsSearch.trim() !== '' ? `&fields.color[in]=${colorsSearch}` : '')
+        (tags !== '' ? `&fields.tags[in]=${tags}` : '') +
+        (colors !== '' ? `&fields.color[in]=${colors}` : '')
       );
       const { items, includes } = response.data;
       const images = includes.Asset.reduce((acc, cur) => {
