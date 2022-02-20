@@ -33,3 +33,8 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+.collection {
+  display: flex;
+  margin-top: 24px;
+}
